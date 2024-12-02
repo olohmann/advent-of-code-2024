@@ -16,6 +16,12 @@
         <Content Include="Inputs\Day01-Example.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
+        <Content Include="Inputs\Day02.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Inputs\Day02-Example.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
         <Compile Include="Days\Day01.fs" />
         <Compile Include="Days\Day02.fs" />
         <Compile Include="Program.fs"/>

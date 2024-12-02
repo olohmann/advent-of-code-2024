@@ -25,10 +25,11 @@ let readLines (fileType: DataInput) (day: AdventDays) : string array =
 let readText (fileType: DataInput) (day: AdventDays) : string =
     File.ReadAllText (getInputFilePath fileType day)
     
-let readLinesAs2DArray (chompWhitespace: bool) (splitOption: string) (day: AdventDays) (fileType: DataInput) : string[][] =
+let readLinesAs2DArray<'T> (chompWhitespace: bool) (splitOption: string) (parseFunc: string -> 'T) (day: AdventDays) (fileType: DataInput): 'T[][] =
     let lines = readLines fileType day
     lines |> Array.map (fun line -> if chompWhitespace then replaceMultipleWhitespaces line else line)
           |> Array.map (fun line -> line.Split([|splitOption|], System.StringSplitOptions.None))
+          |> Array.map (Array.map parseFunc)
 
-let inputAs2DArraySplitBySpace (day: AdventDays) (fileType: DataInput) : string[][] =
-    readLinesAs2DArray true " " day fileType
+let inputAs2DArraySplitBySpace (parseFunc: string -> 'T) (day: AdventDays) (fileType: DataInput) : 'T[][] =
+    readLinesAs2DArray true " " parseFunc day fileType

@@ -4,7 +4,7 @@ open AdventOfCode.Utils.Input
 open AdventOfCode.Utils.Misc
 open AdventOfCode.Utils.Types
 
-let input = inputAs2DArraySplitBySpace Day01 DataInput.TestData
+let input = inputAs2DArraySplitBySpace id Day01 DataInput.TestData
 
 let solvePart1 () =
     let left = input |> getColumn 0 |> Array.map int |> Array.sort
