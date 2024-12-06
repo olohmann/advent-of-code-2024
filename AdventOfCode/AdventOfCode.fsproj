@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Utils\Board2D.fs" />
         <Compile Include="Utils\Types.fs" />
         <Compile Include="Utils\Input.fs" />
         <Compile Include="Utils\Output.fs" />
@@ -22,8 +23,22 @@
         <Content Include="Inputs\Day02-Example.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
+        <Content Include="Inputs\Day03.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Inputs\Day03-Example.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Inputs\Day04.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Inputs\Day04-Example.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
         <Compile Include="Days\Day01.fs" />
         <Compile Include="Days\Day02.fs" />
+        <Compile Include="Days\Day03.fs" />
+        <Compile Include="Days\Day04.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
