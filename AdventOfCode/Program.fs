@@ -15,6 +15,7 @@ let main argv =
     | 2 -> AdventOfCode.Days.Day02.run()
     | 3 -> AdventOfCode.Days.Day03.run()
     | 4 -> AdventOfCode.Days.Day04.run()
+    | 5 -> AdventOfCode.Days.Day05.run()
     // Add more days as implemented
     | _ -> printfn "Day %d is not implemented yet." dayToRun
 
