@@ -63,7 +63,7 @@ let solvePart1 () =
                 
     let res = pageUpdates |> List.filter (isCorrectPageUpdate pageOrderingRules) |> List.map getMiddleElement |> List.sum
     
-    //assert (res = 5948)
+    assert (res = 5948)
     res
 
 
@@ -91,6 +91,7 @@ let solvePart2 () =
                 let correctedUpdate = reorderUpdate pageOrderingRules u
                 correctedUpdate |> getMiddleElement)
     
+    assert (res = 3062)
     res
  
 let run () =
