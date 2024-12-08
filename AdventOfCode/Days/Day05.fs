@@ -96,7 +96,7 @@ let solvePart2 () =
  
 let run () =
     let part1Result = solvePart1()
-    printfn $"Day 4, Part 1: %A{part1Result}"
+    printfn $"Day 5, Part 1: %A{part1Result}"
 
     let part2Result = solvePart2()
-    printfn $"Day 4, Part 2: %A{part2Result}"
+    printfn $"Day 5, Part 2: %A{part2Result}"
