@@ -210,3 +210,15 @@ let ``all_directions`` () =
     let actual = allValidDirections |> List.map Seq.toArray
 
     Assert.Equal<int array list>(expected, actual)
+    
+[<Fact>]
+let ``tracking_board`` () =
+     let expected : Board2D<bool> =  [| [| false; false; false; false; false |]
+                                        [| false; false; false; false; false |]
+                                        [| false; false; false; false; false |]
+                                        [| false; false; false; false; false |]
+                                        [| false; false; false; false; false |] |]
+     
+     let actual = createTrackingBoard b 
+
+     Assert.Equal<Board2D<bool>>(expected, actual)

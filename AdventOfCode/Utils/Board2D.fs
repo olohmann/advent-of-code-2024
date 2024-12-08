@@ -39,8 +39,46 @@ let unwrapKernel (kernel: Kernel<'T>) : UnwrappedKernel<'T> =
         Center = Option.get kernel.Center
     }
 
+let prettyPrintBoard (board: Board2D<'T>) (converter: 'T -> char) =
+    board
+    |> Array.map (fun a -> a |> Array.map converter)
+    |> Array.iter (fun row ->
+        row
+        |> Array.iter (fun cell -> printf "%c" cell)
+        printfn ""
+    )
+
+   
+let findElement(board: Board2D<'T>) (predicate: 'T -> bool): 'T option =
+    board
+    |> Array.tryPick (fun row ->
+        row |> Array.tryFind predicate
+    )
+
+let findElementPositions (board: Board2D<'T>) (predicate: 'T -> bool) : Position seq =
+    seq {
+        for rowIndex in 0 .. board.Length - 1 do
+            for colIndex in 0 .. board.[rowIndex].Length - 1 do
+                if predicate board.[rowIndex].[colIndex] then
+                    yield { Row = rowIndex; Col = colIndex }
+    }    
+
+let findElementPosition (board: Board2D<'T>) (predicate: 'T -> bool) : Position option =
+    board
+    |> Array.mapi (fun rowIndex row ->
+        row
+        |> Array.mapi (fun colIndex cell ->
+            if predicate cell then Some { Row = rowIndex; Col = colIndex } else None
+        )
+        |> Array.tryPick id
+    )
+    |> Array.tryPick id
+    
 let isValidPosition (board: Board2D<'T>) (pos: Position) : bool =
     pos.Row >= 0 && pos.Row < board.Length && pos.Col >= 0 && pos.Col < board.[pos.Row].Length
+
+let createTrackingBoard (board: Board2D<'T>) : Board2D<bool> =
+    Array.init board.Length (fun _ -> Array.init board.[0].Length (fun _ -> false))
 
 let getSeq<'T> (board: Board2D<'T>) (pos: Position) (count: int) (stepRow: int) (stepCol: int) : 'T seq option =
     if isValidPosition board pos then
