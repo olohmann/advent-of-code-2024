@@ -12,37 +12,36 @@ type Equation = {
     Parts: bigint list
 }
 
-// (operations: (bigint -> bigint -> bigint) list)
-
 let solvePart1 () =
     let rec validateEquation (expectedResult: bigint) (res: bigint option) (parts: bigint list) : bool =
         match res with
         | Some value ->
             match parts with
             | [] -> expectedResult = value
-            | head :: rest -> (validateEquation expectedResult (Some (value * head)) rest) || (validateEquation expectedResult (Some (value + head)) rest)
-            | _ -> true
+            | head :: rest -> (validateEquation expectedResult (Some (value * head)) rest)
+                              || (validateEquation expectedResult (Some (value + head)) rest)
         | None -> 
             match parts with
             | [] -> failwith "Unexpected"
             | [x] -> failwith "Unexpected"
-            | x :: y :: rest -> (validateEquation expectedResult (Some (x * y)) rest) || (validateEquation expectedResult (Some (x + y)) rest)
-            | _ -> true
+            | x :: y :: rest -> (validateEquation expectedResult (Some (x * y)) rest)
+                                || (validateEquation expectedResult (Some (x + y)) rest)
 
     let equations = lines |> List.map (fun l ->
-        let s1 = l.Split(':')
-        let s2 = s1.[1].Split(' ')
-                 |> Array.map _.Trim()
-                 |> Array.filter (fun x -> not (x = ""))
-                 |> Array.map BigInteger.Parse
-                 |> Array.toList
+                                 let s1 = l.Split(':')
+                                 let s2 = s1.[1].Split(' ')
+                                          |> Array.map _.Trim()
+                                          |> Array.filter (fun x -> not (x = ""))
+                                          |> Array.map BigInteger.Parse
+                                          |> Array.toList
                  
-        { Result = BigInteger.Parse s1.[0]; Parts = s2 })
+                                 { Result = BigInteger.Parse s1.[0]; Parts = s2 })
     
     let x = equations |> List.filter (fun e ->
         validateEquation e.Result None e.Parts 
     )
     
+    // 20281182715321
     x |> List.sumBy _.Result
 
 let solvePart2 () =
@@ -57,29 +56,32 @@ let solvePart2 () =
         | Some value ->
             match parts with
             | [] -> expectedResult = value
-            | head :: rest -> (validateEquation expectedResult (Some (value * head)) rest) || (validateEquation expectedResult (Some (value + head)) rest) || (validateEquation expectedResult (Some (concatBigInteger value head)) rest) 
-            | _ -> true
+            | head :: rest -> (validateEquation expectedResult (Some (value * head)) rest)
+                              || (validateEquation expectedResult (Some (value + head)) rest)
+                              || (validateEquation expectedResult (Some (concatBigInteger value head)) rest)
         | None -> 
             match parts with
             | [] -> failwith "Unexpected"
             | [x] -> failwith "Unexpected"
-            | x :: y :: rest -> (validateEquation expectedResult (Some (x * y)) rest) || (validateEquation expectedResult (Some (x + y)) rest) || (validateEquation expectedResult (Some (concatBigInteger x y)) rest) 
-            | _ -> true
+            | x :: y :: rest -> (validateEquation expectedResult (Some (x * y)) rest)
+                                || (validateEquation expectedResult (Some (x + y)) rest)
+                                || (validateEquation expectedResult (Some (concatBigInteger x y)) rest)
 
     let equations = lines |> List.map (fun l ->
-        let s1 = l.Split(':')
-        let s2 = s1.[1].Split(' ')
-                 |> Array.map _.Trim()
-                 |> Array.filter (fun x -> not (x = ""))
-                 |> Array.map BigInteger.Parse
-                 |> Array.toList
+                                 let s1 = l.Split(':')
+                                 let s2 = s1.[1].Split(' ')
+                                          |> Array.map _.Trim()
+                                          |> Array.filter (fun x -> not (x = ""))
+                                          |> Array.map BigInteger.Parse
+                                          |> Array.toList
                  
-        { Result = BigInteger.Parse s1.[0]; Parts = s2 })
+                                 { Result = BigInteger.Parse s1.[0]; Parts = s2 })
     
     let x = equations |> List.filter (fun e ->
         validateEquation e.Result None e.Parts 
     )
     
+    // 159490400628354
     x |> List.sumBy _.Result
  
 let run () =
